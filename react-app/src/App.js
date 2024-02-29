@@ -1,21 +1,25 @@
-
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Route, Switch } from "react-router-dom";
+import { authenticate } from "./store/session";
+import LandingPage from "./components/LandingPage";
 function App() {
+  const dispatch = useDispatch();
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    dispatch(authenticate()).then(() => setIsLoaded(true));
+  }, [dispatch]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {isLoaded && (
+        <Switch>
+          <Route path="/">
+            <LandingPage />
+          </Route>
+        </Switch>
+      )}
+    </>
   );
 }
 
