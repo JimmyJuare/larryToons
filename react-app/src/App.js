@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { authenticate } from "./store/session";
 import LandingPage from "./components/LandingPage";
+import Navigation from "./components/Navigation";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -12,6 +13,7 @@ function App() {
   }, [dispatch]);
   return (
     <>
+    <Navigation isLoaded={isLoaded} />  
       {isLoaded && (
         <Switch>
           <Route path="/">
